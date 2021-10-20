@@ -19,6 +19,7 @@ class Post extends Model
 
     public function user()
     {
+        // １投稿が１ユーザに結びつくという宣言
         return $this->belongsTo('App\Models\User');
     }
 }

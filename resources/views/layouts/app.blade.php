@@ -77,18 +77,19 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            <div class="container">
+        {{-- <main class="py-4"> --}}
+            {{-- <div class="container"> --}}
                 <div class="row">
-                    <div class="col-12 col-md-4 col-lg-3">
+                    {{-- col-md-3：タブレットサイズのとき。lgはPCサイズのとき。 --}}
+                    <div class="col-sm-3 col-lg-3">
                         @include('layouts.sidebar')
                     </div>
-                    <div class="col-12 col-md-8 col-lg-9">
+                    <div class="col-sm-9 col-lg-9">
                         @yield('content')
                     </div>
                 </div>
-            </div>
-        </main>
+            {{-- </div> --}}
+        {{-- </main> --}}
     </div>
 </body>
 </html>
