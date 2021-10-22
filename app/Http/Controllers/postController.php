@@ -128,7 +128,9 @@ class postController extends Controller
     // データを削除する。
     public function destroy(Post $post)
     {
-        //
+        //投稿に結びつくコメントを削除する
+        $post->comments()->delete();
+        //投稿を削除する
         $post->delete();
         return redirect()->route('home')->with('message', '投稿を削除しました');
     }

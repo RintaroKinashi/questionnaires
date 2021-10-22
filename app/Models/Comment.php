@@ -5,27 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     // フォームで投稿された内容をDBに保存するための許可設定
     protected $fillable = [
-        'title',
         'body',
         'user_id',
-        'image',
+        'post_id',
     ];
 
     public function user()
     {
-        // １投稿が１ユーザに結びつくという宣言
+        // １コメントが１ユーザに結びつくという宣言
         return $this->belongsTo('App\Models\User');
     }
 
-    public function comments()
+    public function post()
     {
-        // １投稿が複数のコメントに結びつくという宣言
-        return $this->hasMany('App\Models\Comment');
+        // 1コメントが１投稿に結びつく
+        return $this->belongsTo('App\Models\Post');
     }
 }

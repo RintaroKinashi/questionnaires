@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// get：ページを表示する
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// post：データを保存する
+Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');
+
+// リソースコントローラーの宣言
 Route::resource('/post', 'postController');
