@@ -33,6 +33,7 @@
                 @method('put')
                 <div class="form-group">
                     <label for="title">件名</label>
+                    {{-- old('name属性の値') --}}
                     <input type="text" name="title" class="form-control" id="title" value="{{old('title', $post->title)}}" placeholder="Enter Title">
                 </div>
 

@@ -12,6 +12,7 @@ class postController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // データを一覧表示
     public function index()
     {
         //
@@ -22,6 +23,7 @@ class postController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // 新規作成用フォームの表示
     public function create()
     {
         //
@@ -34,6 +36,7 @@ class postController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // 新規作成を保存
     public function store(Request $request)
     {
         $inputs = $request->validate([
@@ -45,7 +48,6 @@ class postController extends Controller
         $post = new Post();
         // $post->title：インスタンス内のtitleを指す
         // $request->title：フォームから投稿されたデータ
-        $post->title = $request->title;
         $post->title = $request->title;
         $post->body = $request->body;
         // 認証済みのユーザIDを入れる
@@ -69,6 +71,7 @@ class postController extends Controller
      * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
+    // 作成データを個別表示
     public function show(Post $post)
     {
         //
@@ -82,6 +85,7 @@ class postController extends Controller
      * @return \Illuminate\Http\Response
      * editとupdateの動きの違いとは？
      */
+    // 作成データ編集用フォームの表示
     public function edit(Post $post)
     {
         return view('post.edit', compact('post'));
@@ -94,6 +98,7 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // 編集したデータを保存
     public function update(Request $request, Post $post)
     {
         $inputs = request()->validate([
@@ -120,6 +125,7 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // データを削除する。
     public function destroy(Post $post)
     {
         //

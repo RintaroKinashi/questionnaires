@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+// モデルはDBとのやり取りを担当
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,6 +47,7 @@ class User extends Authenticatable
     // リレーションの構築
     public function posts()
     {
+        // 1人のユーザが複数のPostに結びつく
         return $this->hasMany('App\Models\Post');
     }
 }

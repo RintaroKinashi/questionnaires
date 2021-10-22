@@ -32,12 +32,12 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">件名</label>
-                    <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}" placeholder="Enter Title">
+                    <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}" placeholder="タイトル">
                 </div>
 
                 <div class="form-group">
                     <label for="body">本文</label>
-                    <textarea name="body" class="form-control" id="body" cols="30" rows="10">{{old('body')}}</textarea>
+                    <textarea name="body" class="form-control" id="body" cols="30" rows="10" placeholder="ここに入力してください。">{{old('body')}}</textarea>
                 </div>
 
                 <div class="form-group">
