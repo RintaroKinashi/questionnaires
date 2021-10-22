@@ -31,4 +31,14 @@ class HomeController extends Controller
         // compact()：変数名と値から配列を作成する。
         return view('home', compact('posts', 'user'));
     }
+
+    public function mypost()
+    {
+        $user = auth()->user();
+        $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        return view('mypost', compact(
+            'posts',
+            'user'
+        ));
+    }
 }

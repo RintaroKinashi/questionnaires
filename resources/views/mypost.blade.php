@@ -6,7 +6,7 @@
 @endif
 {{-- mb：下側のマージン？意味無いように見える --}}
 <div class="">
-    <p>home</p>
+    <p>あなたの投稿</p>
     {{-- $user：ログイン中のユーザ情報を引っ張って来ている --}}
     <p>{{$user->name}}さん、こんにちは！</p>
     {{-- <p>あなたのメアド：{{$user->email}}</p> --}}
@@ -18,6 +18,9 @@
 @endphp --}}
 
 {{-- コントローラーに持って来させた$posts（配列群）を一つずつの配列として処理する --}}
+@if(count($posts)==0)
+<p>あなたはまだ投稿していません！</p>
+@else
 @foreach ($posts as $post)
 <div class="container-fluid mt-20" style="margin-left:-10px;">
     <div class="row">
@@ -49,12 +52,12 @@
                 <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                     <div class="px-4 pt-3">
                         @if ($post->comments->count())
-                            <span class="badge badge-success">
-                                返信 {{$post->comments->count()}}件
-                            </span>
-                        @else
-                            <span>コメントはまだありません。</span>
-                        @endif
+                        <span class="badge badge-success">
+                            返信 {{$post->comments->count()}}件
+                        </span>
+                    @else
+                        <span>コメントはまだありません。</span>
+                    @endif
 
                     </div>
                     <div class="px-4 pt-3">
@@ -67,4 +70,5 @@
     </div>
 </div>
 @endforeach
+@endif
 @endsection

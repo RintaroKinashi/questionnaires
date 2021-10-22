@@ -21,6 +21,7 @@ Auth::routes();
 
 // get：ページを表示する
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/mypost', 'HomeController@mypost')->name('home.mypost');
 
 // post：データを保存する
 Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');
