@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    {{-- 第二引数は環境変数が存在しないときに返される --}}
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -15,14 +15,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bc24741e30.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     {{-- asset：publicフォルダにアクセスするために使う --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- Bootstrapから落としたCSSを使うための記述 --}}
     <link href="{{ asset('css/forum.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
+        {{-- bg-white shadow-sm--}}
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
