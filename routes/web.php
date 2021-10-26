@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/mypost', 'HomeController@mypost')->name('home.mypost');
 Route::get('/mycomment', 'HomeController@mycomment')->name('home.mycomment');
 Route::get('/contact/create', 'ContactController@create')->name('contact.create');
+Route::get('/profile', 'ProfileController@index')->name('profile');
 
 // post：データを保存する
 Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');

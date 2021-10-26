@@ -20,4 +20,8 @@
     class="list-group-item {{url()->current()==route('contact.create')? 'active' : ''}}">
         <i class="fas fa-user-edit pr-2"></i><span>お問い合わせ</span>
     </a>
+    <a href="{{route('profile')}}"
+    class="list-group-item {{url()->current()==route('profile')? 'active' : ''}}">
+        <i class="fas fa-list pr-2"></i><span>アカウント管理</span>
+    </a>
 </div>
