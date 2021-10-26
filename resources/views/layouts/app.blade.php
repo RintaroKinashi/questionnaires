@@ -81,6 +81,7 @@
         </nav>
 
         {{-- <main class="py-4"> --}}
+            @if(Auth::check())
             {{-- <div class="container"> --}}
                 <div class="row">
                     {{-- col-md-3：タブレットサイズのとき。lgはPCサイズのとき。 --}}
@@ -88,10 +89,23 @@
                         @include('layouts.sidebar')
                     </div>
                     <div class="col-sm-9 col-lg-9">
+                        {{-- エラーメッセージの表示 --}}
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         @yield('content')
                     </div>
                 </div>
             {{-- </div> --}}
+            @else
+                @yield('content')
+            @endif
         {{-- </main> --}}
     </div>
 </body>
