@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +22,14 @@ Auth::routes();
 // });
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest'); // ログイン済みユーザがmiddleware('guest') を付与したルート設定にアクセスするとログイン後のページ(\home)にリダイレクトされる。
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/mypost', 'HomeController@mypost')->name('home.mypost');
 Route::get('/mycomment', 'HomeController@mycomment')->name('home.mycomment');
 Route::get('/contact/create', 'ContactController@create')->name('contact.create');
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::middleware(['can:admin'])->group(function () {
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+});
 
 // post：データを保存する
 Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');
