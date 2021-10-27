@@ -10,10 +10,13 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * The policy mappings for the application.
      *
+     * 制御系の関数の定義だったりリンクだったりをおいておく場所？
+     *
      * @var array
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        App\Models\Post::class => App\Policies\PostPolicy::class,
     ];
 
     /**
