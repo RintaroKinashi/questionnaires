@@ -56,4 +56,9 @@ class User extends Authenticatable
         // １ユーザが複数のコメントに結びつくという宣言
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
 }
