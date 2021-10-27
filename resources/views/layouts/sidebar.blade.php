@@ -27,4 +27,8 @@
         <i class="fas fa-list pr-2"></i><span>アカウント管理</span>
     </a>
     @endcan
+    <a href="{{route('profile.edit', auth()->user()->id)}}"
+    class="list-group-item {{url()->current()==route('profile.edit', auth()->user()->id)?'active':''}}">
+        <i class="fas fa-id-badge pr-2"></i><span>プロフィール編集</span>
+    </a>
 </div>
