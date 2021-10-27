@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/mypost', 'HomeController@mypost')->name('home.mypost');
 Route::get('/mycomment', 'HomeController@mycomment')->name('home.mycomment');
 Route::get('/contact/create', 'ContactController@create')->name('contact.create');
+// URLに侵入したIDが管理者の場合のみ、閲覧可能とする記述
 Route::middleware(['can:admin'])->group(function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
 });

@@ -88,6 +88,7 @@ class postController extends Controller
     // 作成データ編集用フォームの表示
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return view('post.edit', compact('post'));
     }
 
@@ -101,6 +102,7 @@ class postController extends Controller
     // 編集したデータを保存
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $inputs = request()->validate([
             'title' => 'required|max:255',
             'body' => 'required|max:255',
@@ -128,6 +130,7 @@ class postController extends Controller
     // データを削除する。
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         //投稿に結びつくコメントを削除する
         $post->comments()->delete();
         //投稿を削除する
