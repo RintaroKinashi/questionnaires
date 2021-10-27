@@ -3,6 +3,9 @@
 
 <div class="card mb-4">
     <div class="card-header">
+        {{-- assetはPublicフォルダにアクセスするための関数 --}}
+        <img src="{{asset('storage/avatar/'.($post->user->avatar??'user_default.jpg'))}}"
+                        class="rounded-circle" style="width:40px;height:40px;">
         <div class="text-muted small mr-3">
             {{$post->user->name}}
         </div>

@@ -52,6 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'avatar' => ['image', 'max:1024'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +65,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // ユーザテーブルのデータ
+        $attr = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+        ];
+
+        // avatarの保存
+        if (request()->hasFile('avatar')) {
+            // 送信された中にavatarがあれば、画像ファイル名を持ってくる
+            $name = request()->file('avatar')->getClientOriginalName();
+            $avatar = date('Ymd_His') . '_' . $name;
+            request()->file('avatar')->storeAs('public/avatar', $avatar);
+            // avatarファイル名（ファイルパス）をデータに追加
+            $attr['avatar'] = $avatar;
+        }
+
+        // ちょっとこの辺わからない。まず自分じゃかけない。kinashi
+        $user = User::create($attr);
+        $user->roles()->attach(2);
+        return $user;
     }
 }
