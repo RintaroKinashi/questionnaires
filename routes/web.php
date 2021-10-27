@@ -31,10 +31,13 @@ Route::get('/contact/create', 'ContactController@create')->name('contact.create'
 Route::middleware(['can:admin'])->group(function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
 });
+Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 
 // post：データを保存する
 Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');
 Route::post('/contact/store', 'ContactController@store')->name('contact.store');
+
+Route::put('/profile/{user}', 'ProfileController@update')->name('profile.update');
 
 // リソースコントローラーの宣言
 Route::resource('/post', 'postController');
