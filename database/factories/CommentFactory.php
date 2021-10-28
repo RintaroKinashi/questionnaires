@@ -2,33 +2,31 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
+use App\Models\Comment;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class PostFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
-     *  https://prglog.info/home/?p=374
+     *
      * @return array
      */
     public function definition()
     {
         return [
-            // 日本語にならない。。
-            'title' => $this->faker->realText(10),
-            'body' => $this->faker->realText(50),
+            'post_id' => Post::all()->random()->id,
             'user_id' => User::all()->random()->id,
-            'image' => Post::all()->random()->image,
+            'body' => $this->faker->realText(50),
         ];
     }
 }
