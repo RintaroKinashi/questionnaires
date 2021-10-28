@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -26,18 +27,22 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/mypost', 'HomeController@mypost')->name('home.mypost');
 Route::get('/mycomment', 'HomeController@mycomment')->name('home.mycomment');
-Route::get('/contact/create', 'ContactController@create')->name('contact.create');
 // URLに侵入したIDが管理者の場合のみ、閲覧可能とする記述
 Route::middleware(['can:admin'])->group(function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::delete('/profile/delete/{user}', 'ProfileController@delete')->name('profile.delete');
 });
-Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 
 // post：データを保存する
 Route::post('/post/comment/store', 'CommentController@store')->name('comment.store');
-Route::post('/contact/store', 'ContactController@store')->name('contact.store');
 
+// お問い合わせフォーム
+Route::post('/contact/store', 'ContactController@store')->name('contact.store');
+Route::get('/contact/create', 'ContactController@create')->name('contact.create');
+
+// プロフィール編集画面
 Route::put('/profile/{user}', 'ProfileController@update')->name('profile.update');
+Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 
 // リソースコントローラーの宣言
 Route::resource('/post', 'postController');
