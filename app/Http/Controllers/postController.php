@@ -113,7 +113,7 @@ class postController extends Controller
         if (request('image')) {
             $oldimage = 'public/images/' . $post->image;
             Storage::delete($oldimage);
-            $name = request()->file('image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . request()->file('image')->getClientOriginalName();
             request()->file('image')->move('storage/images', $name);
             $post->image = $name;
         }
