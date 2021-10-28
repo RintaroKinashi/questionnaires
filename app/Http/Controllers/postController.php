@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class postController extends Controller
 {
@@ -110,6 +111,8 @@ class postController extends Controller
         ]);
 
         if (request('image')) {
+            $oldimage = 'public/images/' . $post->image;
+            Storage::delete($oldimage);
             $name = request()->file('image')->getClientOriginalName();
             request()->file('image')->move('storage/images', $name);
             $post->image = $name;
@@ -133,6 +136,8 @@ class postController extends Controller
         $this->authorize('delete', $post);
         //投稿に結びつくコメントを削除する
         $post->comments()->delete();
+        // 投稿に結びつく画像を削除する
+        Storage::delete('public/images/' . $post->image);
         //投稿を削除する
         $post->delete();
         return redirect()->route('home')->with('message', '投稿を削除しました');
