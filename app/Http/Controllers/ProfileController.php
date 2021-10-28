@@ -7,6 +7,8 @@ use App\Models\User;
 // アカウント編集画面の入力値を保存するために呼び出す名前空間
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+// アバターを削除するために必要なuse宣言
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -38,8 +40,14 @@ class ProfileController extends Controller
         ]);
         $inputs['password'] = Hash::make($inputs['password']);
 
-        // アバターの保存
         if (request('avatar')) {
+            // 現在のアバターの削除
+            if ($user->avatar !== 'user_default.jpg') {
+                $oldavatar = 'public/avatar/' . $user->avatar;
+                // ストレージ内の画像削除
+                Storage::delete($oldavatar);
+            }
+            // 新規の画像の元の名を取ってくる
             $name = request()->file('avatar')->getClientOriginalName();
             $avatar = date('Ymd_His') . '_' . $name;
             request()->file('avatar')->storeAs('public/avatar', $avatar);
