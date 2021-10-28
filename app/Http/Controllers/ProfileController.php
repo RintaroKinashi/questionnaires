@@ -58,17 +58,21 @@ class ProfileController extends Controller
         return back()->with('message', '情報を更新しました');
     }
 
-    public function delete(User $user, Post $post)
+    public function delete(User $user)
     {
-        $this->authorize('delete', $post);
-        //投稿に結びつくコメントを削除する
-        $post->comments()->delete();
-        // 投稿に結びつく画像を削除する
-        Storage::delete('public/images/' . $post->image);
-        //投稿を削除する
-        $post->delete();
-        Storage::delete('public/avatar/' . $user->avatar);
-        $user->delete();
+        foreach ($user->posts as $post) {
+            $this->authorize('delete', $post);
+            // 投稿に結びつくコメントを削除する
+            $post->comments()->delete();
+            // 投稿に結びつく画像を削除する
+            Storage::delete('public/images/' . $post->image);
+            // 投稿を削除する
+            $post->delete();
+        }
+        if ($user->avatar !== 'user_default.jpg') {
+            Storage::delete('public/avatar/' . $user->avatar);
+        }
+        // $user->delete();
         return back()->with('message', 'ユーザを削除しました。');
     }
 }
