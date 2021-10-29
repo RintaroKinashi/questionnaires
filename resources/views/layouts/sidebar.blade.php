@@ -13,7 +13,7 @@
         <i class="fas fa-user-edit pr-2"></i><span>自分の投稿</span>
     </a>
     <a href="{{route('home.mycomment')}}"
-    class="list-group-item {{url()->current()==route('home.mypost')? 'active' : ''}}">
+    class="list-group-item {{url()->current()==route('home.mycomment')? 'active' : ''}}">
         <i class="fas fa-user-edit pr-2"></i><span>コメントした投稿</span>
     </a>
     <a href="{{route('contact.create')}}"
