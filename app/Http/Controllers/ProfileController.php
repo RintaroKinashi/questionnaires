@@ -60,9 +60,11 @@ class ProfileController extends Controller
 
     public function delete(User $user)
     {
+        // 削除予定のユーザが残したコメントを全て削除する。
+        $user->comments()->delete();
         foreach ($user->posts as $post) {
             $this->authorize('delete', $post);
-            // 投稿に結びつくコメントを削除する
+            // 投稿に結びつく全てのコメントを削除する
             $post->comments()->delete();
             // 投稿に結びつく画像を削除する
             Storage::delete('public/images/' . $post->image);
