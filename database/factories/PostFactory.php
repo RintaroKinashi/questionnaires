@@ -28,7 +28,7 @@ class PostFactory extends Factory
             'title' => $this->faker->realText(10),
             'body' => $this->faker->realText(50),
             'user_id' => User::all()->random()->id,
-            'image' => Post::all()->random()->image,
+            // 'image' => Post::all()->random()->image,
         ];
     }
 }
