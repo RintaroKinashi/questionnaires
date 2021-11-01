@@ -61,6 +61,51 @@
 
                     <button type=”submit” class="btn btn-success">送信する</button>
                 </form>
+                @can('admin')
+                <div class="mt-5">
+                    <h4 class="mb-3">役割付与・削除（アドミンユーザーにのみ表示）</h4>
+                    <table class="table border">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col-4" width="30%">役割</th>
+                                <th scope="col-4" width="40%">付与</th>
+                                <th scope="col-4" width="40%">削除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($roles as $role)
+                            <tr>
+                                <td>
+                                    {{$role->name}}
+                                </td>
+                                <td>
+                                    <form method="post" action="{{route('role.attach', $user)}}">
+                                        @csrf
+                                        @method('put')
+                                        <input type="hidden" name="role" value="{{$role->id}}">
+                                        <button class="btn btn-primary"
+                                         @if($user->roles->contains($role))
+                                          disabled
+                                         @endif>ロール追加</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="{{route('role.detach', $user)}}">
+                                        @csrf
+                                        @method('put')
+                                        <input type="hidden" name="role" value="{{$role->id}}">
+                                        <button class="btn btn-danger"
+                                         @if(!$user->roles->contains($role))
+                                          disabled
+                                         @endif>ロール削除</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @endcan
             </div>
         </div>
     </div>
