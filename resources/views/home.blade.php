@@ -28,7 +28,7 @@
                         <img src="{{asset('storage/avatar/'.($post->user->avatar??'user_default.jpg'))}}" class="rounded-circle" style="width:40px;height:40px;">
                         <div class="media-body ml-1">
                             {{-- リレーションを設定したためできること --}}
-                            <div class="text-muted small">{{$post->user->name}}</div>
+                            <div class="text-muted small">{{$post->user->name??'削除されたユーザ'}}</div>
                             {{-- {{route('ルート名',パラメータ)}} でルートにパラメータを渡せる --}}
                             <a href="{{route('post.show', $post)}}">{{ $post->title }}</a>
                         </div>
