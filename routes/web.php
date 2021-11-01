@@ -31,6 +31,9 @@ Route::get('/mycomment', 'HomeController@mycomment')->name('home.mycomment');
 Route::middleware(['can:admin'])->group(function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::delete('/profile/delete/{user}', 'ProfileController@delete')->name('profile.delete');
+
+    Route::put('/roles/{user}/attach', 'RoleController@attach')->name('role.attach');
+    Route::put('/roles/{user}/detach', 'RoleController@detach')->name('role.detach');
 });
 
 // post：データを保存する

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Role;
 // アカウント編集画面の入力値を保存するために呼び出す名前空間
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,8 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        return view('profile.edit', compact('user'));
+        $roles = Role::all();
+        return view('profile.edit', compact('user', 'roles'));
     }
 
     public function update(User $user, Request $request)
