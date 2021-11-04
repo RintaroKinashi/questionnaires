@@ -62,4 +62,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role');
     }
+
+    public function questionnaires()
+    {
+        return $this->hasMany('App\Models\M_questionnaire');
+    }
+
+    public function anseres()
+    {
+        return $this->hasMany('App\Models\R_anser');
+    }
 }
