@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\R_anser;
 use App\Models\R_questionnaire;
 
-class QuestionnaireController extends Controller
+class AnserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        $r_questionnaires = R_questionnaire::orderBy('questionnaire_id', 'desc')->get();
-        return view('questionnaire.index', compact('r_questionnaires'));
+        //
     }
 
     /**
@@ -25,6 +25,7 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -33,8 +34,16 @@ class QuestionnaireController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, R_questionnaire $r_questionnaire)
     {
+        $Anser = new R_anser();
+        $Anser->user_id = auth()->user()->id;
+        $Anser->questionnaire_id = $r_questionnaire->questionnaire_id;
+        $Anser->question_id = $r_questionnaire->question_id;
+        $Anser->anser = $request->name;
+        $Anser->save();
+        var_dump($Anser);
+        return back()->with('message', '保存しました!');
     }
 
     /**

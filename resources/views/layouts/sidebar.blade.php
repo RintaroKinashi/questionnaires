@@ -16,8 +16,8 @@
     class="list-group-item {{url()->current()==route('home.mycomment')? 'active' : ''}}">
         <i class="fas fa-user-edit pr-2"></i><span>コメントした投稿</span>
     </a>
-    <a href="{{route('questionnaire.create')}}"
-    class="list-group-item {{url()->current()==route('questionnaire.create')? 'active' : ''}}">
+    <a href="{{route('questionnaire.index')}}"
+    class="list-group-item {{url()->current()==route('questionnaire.index')? 'active' : ''}}">
         <i class="fas fa-user-edit pr-2"></i><span>アンケート</span>
     </a>
     <a href="{{route('contact.create')}}"

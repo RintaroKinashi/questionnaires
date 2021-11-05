@@ -16,7 +16,6 @@ class R_questionnaire extends Model
 
     public function anser()
     {
-        // 主テーブル側の１対１記述
-        return $this->hasOne('App\Models\R_anser');
+        return $this->hasMany('App\Models\R_anser');
     }
 }

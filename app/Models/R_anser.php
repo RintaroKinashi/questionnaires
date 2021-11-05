@@ -9,6 +9,13 @@ class R_anser extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'questionnaire_id',
+        'question_id',
+        'anser',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');

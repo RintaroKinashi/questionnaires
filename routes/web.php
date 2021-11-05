@@ -50,3 +50,4 @@ Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit
 // リソースコントローラーの宣言
 Route::resource('/post', 'postController');
 Route::resource('/questionnaire', 'QuestionnaireController');
+Route::resource('/anser', 'AnserController');

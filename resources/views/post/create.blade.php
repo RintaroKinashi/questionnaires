@@ -24,6 +24,7 @@
             {{-- method="post" : 内容が送信されるという宣言 --}}
             {{-- route('post.store')：postコントローラーのstoreメソッドを使うという宣言 --}}
             {{-- ※二重波かっこ：エスケープ処理、有効な文を別の文字列に置き換え。phpのhtmlspecialcharsと一緒の処理 --}}
+            {{-- enctype：一回のHTTP通信で複数種類のデータ形式を扱えるようになる --}}
             <form method="post" action="{{route('post.store')}}" enctype="multipart/form-data">
                 {{-- @csrf：シーサーフ対策。form処理をする場合は必須となる --}}
                 @csrf
